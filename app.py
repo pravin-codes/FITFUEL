@@ -71,7 +71,6 @@ def signup():
         else:
             return "Database connection failed. Please check your connection settings."
 
-# Sign-in route
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
@@ -93,7 +92,8 @@ def signin():
                 user = cursor.fetchone()
 
                 if user and check_password_hash(user[3], password):  # user[3] is the hashed password
-                    return f"Welcome {user[1]}!"  # user[1] is the name
+                    # Successful login, redirect to the main page
+                    return redirect(url_for('main'))
                 else:
                     return "Invalid email or password."
             except mysql.connector.Error as err:
@@ -105,5 +105,12 @@ def signin():
         else:
             return "Database connection failed. Please check your connection settings."
 
+
+# Route for main.html
+@app.route('/main')
+def main():
+    return render_template('main.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
+

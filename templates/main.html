@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customized Diet Planner</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Smooth animations */
+    .fade-in {
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .scale-on-hover:hover {
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+
+    /* Cool hover animations for icons */
+    .icon:hover {
+      transform: scale(1.3) rotate(10deg);
+      transition: transform 0.4s ease, color 0.4s ease;
+      color: #00c897 !important;
+    }
+
+    .bg-gradient-custom {
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+    }
+
+    .btn-accent {
+      background-color: #00c897;
+      color: white;
+    }
+
+    .btn-accent:hover {
+      background-color: #009977;
+      color: white;
+    }
+
+    .quote {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #555;
+      font-style: italic;
+    }
+
+    .quote::before {
+      content: "❝";
+      color: #00c897;
+      font-size: 2rem;
+    }
+
+    .quote::after {
+      content: "❞";
+      color: #00c897;
+      font-size: 2rem;
+    }
+
+    /* Custom borders for BMI Calculator and Planner */
+    .bmi-form, .planner-form {
+      border: 2px solid #00c897;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .bmi-form input, .bmi-form button, .planner-form input, .planner-form select {
+      border-radius: 5px;
+    }
+
+    .bmi-form input:focus, .bmi-form button:focus, .planner-form input:focus, .planner-form select:focus {
+      border-color: #00c897;
+      box-shadow: 0 0 5px rgba(0, 200, 151, 0.5);
+    }
+
+    .bmi-form button, .planner-form button {
+      background-color: #00c897;
+      color: white;
+    }
+
+    .bmi-form button:hover, .planner-form button:hover {
+      background-color: #009977;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fas fa-seedling"></i>FIT FUEL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planner">Planner</a></li>
+          <li class="nav-item"><a class="nav-link" href="#BMI" id="bmi-section">BMI</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-gradient-custom text-white text-center py-5 fade-in">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Your Personalized Diet Journey Starts Here</h1>
+      <p class="lead">"Eat smart, stay healthy, and live the life you deserve."</p>
+      <a href="#planner" class="btn btn-accent btn-lg scale-on-hover mt-3">Start Planning</a>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">Why Choose Our Diet Planner?</h2>
+      <div class="row">
+        <div class="col-md-4 fade-in">
+          <i class="fas fa-apple-alt fa-3x text-success mb-3 icon"></i>
+          <h3 class="fw-bold">Healthy Recipes</h3>
+          <p>Discover recipes tailored to your dietary needs.</p>
+        </div>
+        <div class="col-md-4 fade-in">
+          <i class="fas fa-heartbeat fa-3x text-danger mb-3 icon"></i>
+          <h3 class="fw-bold">Track Progress</h3>
+          <p>Monitor your fitness goals with detailed insights.</p>
+        </div>
+        <div class="col-md-4 fade-in">
+          <i class="fas fa-users fa-3x text-primary mb-3 icon"></i>
+          <h3 class="fw-bold">Community Support</h3>
+          <p>Connect with like-minded individuals for motivation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BMI Section -->
+  <section id="BMI" class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">Calculate Your BMI</h2>
+      <form id="bmi-form" class="bmi-form mb-4">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <label for="height" class="form-label">Height (in cm)</label>
+            <input type="number" id="height" class="form-control" placeholder="Enter your height in cm" required>
+          </div>
+          <div class="col-md-6">
+            <label for="weight" class="form-label">Weight (in kg)</label>
+            <input type="number" id="weight" class="form-control" placeholder="Enter your weight in kg" required>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-accent btn-lg scale-on-hover w-100" onclick="calculateBMI()">Calculate BMI</button>
+          </div>
+        </div>
+      </form>
+      <div id="bmi-result" class="text-center">
+        <h3>Your BMI: <span id="bmi-value">0</span></h3>
+        <p id="diet-suggestion"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planner Section -->
+  <section id="planner" class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">Create Your Personalized Plan</h2>
+      <form class="planner-form">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Enter your name">
+          </div>
+          <div class="col-md-6">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" id="age" class="form-control" placeholder="Enter your age">
+          </div>
+          <div class="col-md-6">
+            <label for="goal" class="form-label">Health Goal</label>
+            <select id="goal" class="form-select">
+              <option selected>Weight Loss</option>
+              <option>Weight Gain</option>
+              <option>Maintain</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="dietType" class="form-label">Diet Type</label>
+            <select id="dietType" class="form-select">
+              <option selected>Vegetarian</option>
+              <option>Non-Vegetarian</option>
+              <option>Vegan</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-accent btn-lg scale-on-hover w-100">Generate My Plan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4">
+    <p class="mb-0">© 2024 FIT FUEL. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS for BMI Calculation -->
+  <script>
+    function calculateBMI() {
+      const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to meters
+      const weight = parseFloat(document.getElementById('weight').value);
+      const bmi = weight / (height * height);
+      document.getElementById('bmi-value').textContent = bmi.toFixed(2);
+
+      let suggestion = '';
+      if (bmi < 18.5) {
+        suggestion = 'Underweight: Consider a diet with higher calorie intake.';
+      } else if (bmi >= 18.5 && bmi <= 24.9) {
+        suggestion = 'Normal: Maintain a balanced diet and exercise regularly.';
+      } else if (bmi >= 25 && bmi <= 29.9) {
+        suggestion = 'Overweight: Consider a diet with fewer calories.';
+      } else {
+        suggestion = 'Obese: A calorie-restricted diet and regular exercise are recommended.';
+      }
+      document.getElementById('diet-suggestion').textContent = suggestion;
+    }
+  </script>
+</body>
+</html>
