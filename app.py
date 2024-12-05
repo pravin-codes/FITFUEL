@@ -12,7 +12,8 @@ def create_connection():
             host="localhost",       # Replace with your MySQL host
             user="root",            # Replace with your MySQL username
             password="ppgnmil",     # Replace with your MySQL password
-            database="user_db"      # Replace with your database name
+            database="user_db" ,
+            ssl_disabled=True    # Replace with your database name
         )
         if connection.is_connected():
             return connection
@@ -111,6 +112,7 @@ def signin():
 def main():
     return render_template('main.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
+# This block ensures the app runs when the script is epythonxecuted directly
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
